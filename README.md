@@ -14,3 +14,12 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Perancangan dari aplikasi MedCare
+
+1. Use Case aplikasi MedCare
+![Alt text](https://user-images.githubusercontent.com/100464612/248210084-eb316f78-6b59-4100-a8fd-4296660376d2.png)
+
+2. FlowChart aplikasi MedCare
+![Alt text](https://user-images.githubusercontent.com/100464612/248210084-eb316f78-6b59-4100-a8fd-4296660376d2.png)
