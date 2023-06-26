@@ -42,4 +42,9 @@ class ObatController extends GetxController
     streamController.add(obat.docs);
     return obat.docs;
   }
+
+    Future deleteObat(String id) async {
+    await obatController.doc(id).delete();
+    await getObat();
+  }
 }
