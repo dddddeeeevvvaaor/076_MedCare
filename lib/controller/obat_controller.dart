@@ -47,4 +47,9 @@ class ObatController extends GetxController
     await obatController.doc(id).delete();
     await getObat();
   }
+
+    Future markTaskCompleted(String id, ObatModel obatModel) async {
+    await obatController.doc(id).update(obatModel.toMap());
+    await getObat();
+  }
 }
