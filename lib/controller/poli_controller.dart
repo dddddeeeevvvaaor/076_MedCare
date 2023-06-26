@@ -31,4 +31,9 @@ class PoliController {
     streamController.add(poli.docs);
     return poli.docs;
   }
+
+    Future<void> deletePoli(String id) async {
+    await poliController.doc(id).delete();
+    await getPoli();
+  }
 }
