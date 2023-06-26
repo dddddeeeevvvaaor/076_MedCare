@@ -36,4 +36,10 @@ class ObatController extends GetxController
     );
     await documentReference.update(obatModel.toMap());
   }
+
+    Future getObat() async {
+    final obat = await obatController.get();
+    streamController.add(obat.docs);
+    return obat.docs;
+  }
 }
