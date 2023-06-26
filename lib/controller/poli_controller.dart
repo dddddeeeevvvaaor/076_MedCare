@@ -25,4 +25,10 @@ class PoliController {
     );
     await documentReference.update(poliModel.toMap());
   }
+
+    Future getPoli() async {
+    final poli = await poliController.get();
+    streamController.add(poli.docs);
+    return poli.docs;
+  }
 }
