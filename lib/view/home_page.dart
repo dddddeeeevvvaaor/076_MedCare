@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:medcare/controller/obat_controller.dart';
 import 'package:medcare/services/notification_services.dart';
+import 'package:medcare/services/theme_services.dart';
 import 'package:medcare/theme.dart';
 import 'package:medcare/view/add_obat.dart';
 import 'package:medcare/view/add_poli.dart';
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            appBar: _appBar(),
       backgroundColor: context.theme.backgroundColor,
       body:Column(
         children: [
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  
+  //membuat dropdown button untuk memilih add obat atau add poli
   _addBar() {
     return Container(
       margin: const EdgeInsets.only(left: 20,right: 20,top: 10),
@@ -148,6 +150,30 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  _appBar(){
+    return AppBar(
+      elevation: 1,
+      backgroundColor: context.theme.backgroundColor,
+      leading:GestureDetector(
+        onTap:(){
+            ThemeService().switchTheme();
+            notifyHelper.displayNotification(title:"Theme Changed",
+                body: Get.isDarkMode?"Activated Light Theme":"Activated Dark Theme");
+            //notifyHelper.scheduledNotification();
+        },
+        child: Icon(Get.isDarkMode?Icons.wb_sunny_outlined:Icons.nightlight_round,size: 20,
+        color: Get.isDarkMode?Colors.white:Colors.black,),
+      ),
+      actions: const [
+        CircleAvatar(
+          backgroundImage: NetworkImage(
+              "https://static.wikia.nocookie.net/youtube/images/f/fd/Scary_dora.jpg/revision/latest?cb=20221205095142"),
+        ),
+        SizedBox(width: 20,),
+      ],
     );
   }
 }
