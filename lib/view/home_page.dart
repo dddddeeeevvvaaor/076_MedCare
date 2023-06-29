@@ -4,11 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:medcare/controller/obat_controller.dart';
 import 'package:medcare/services/notification_services.dart';
 import 'package:medcare/theme.dart';
 import 'package:medcare/view/add_obat.dart';
+import 'package:medcare/view/add_poli.dart';
 import 'package:medcare/view/login.dart';
+import 'package:medcare/widgets/button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,6 +52,7 @@ class _HomePageState extends State<HomePage> {
       body:Column(
         children: [
           _addDateBar(),
+                    _addBar(),
           const SizedBox(height: 10,),
         ],
       )
@@ -90,6 +94,59 @@ class _HomePageState extends State<HomePage> {
             _selectedDate=date;
           });
         },
+      ),
+    );
+  }
+  
+  _addBar() {
+    return Container(
+      margin: const EdgeInsets.only(left: 20,right: 20,top: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(DateFormat.yMMMMd().format(DateTime.now()),
+                  style: subHeadingStyle,
+                ),
+                Text("Today",style:HeadingStyle,),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                value: 'Obat',
+                items: const [
+                  DropdownMenuItem(
+                    child: Text('Obat'),
+                    value: 'Obat',
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Poli'),
+                    value: 'Poli',
+                  ),
+                ],
+                onChanged: (value) {
+                  if (value == 'Obat') {
+                    Get.to(() => const AddObat());
+                  } else if (value == 'Poli') {
+                    Get.to(() => const AddPoli());
+                  }
+                },
+
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
