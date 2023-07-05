@@ -4,12 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:medcare/model/obat_model.dart';
 
-class ObatController extends GetxController
-{
+class ObatController extends GetxController {
   final obatController = FirebaseFirestore.instance.collection("obat");
-  
-  final StreamController<List<DocumentSnapshot>> streamController = 
-  StreamController<List<DocumentSnapshot>>.broadcast();
+
+  final StreamController<List<DocumentSnapshot>> streamController =
+      StreamController<List<DocumentSnapshot>>.broadcast();
 
   Stream<List<DocumentSnapshot>>? get stream => streamController.stream;
 
@@ -37,19 +36,20 @@ class ObatController extends GetxController
     await documentReference.update(obatModel.toMap());
   }
 
-    Future getObat() async {
+  Future<List<DocumentSnapshot>> getObat() async {
     final obat = await obatController.get();
     streamController.add(obat.docs);
+    obatList.value = obat.docs.map((doc) => ObatModel.fromMap(doc.data())).toList();
     return obat.docs;
   }
 
-    Future deleteObat(String id) async {
+  Future deleteObat(String id) async {
     await obatController.doc(id).delete();
     await getObat();
   }
 
-    Future markTaskCompleted(String id, ObatModel obatModel) async {
-    await obatController.doc(id).update(obatModel.toMap());
+  Future markObatCompleted(String id) async {
+    await obatController.doc(id).update({'isCompleted': 1});
     await getObat();
   }
 }
