@@ -352,6 +352,15 @@ class _HomePageState extends State<HomePage> {
                     clr: primaryClr,
                     context: context,
                   ),
+            _bottomSheetButton(
+              label: "Delete Task",
+              onTap: () {
+                oc.deleteObat(obatModel.id!);
+                Get.back();
+              },
+              clr: Colors.red[300]!,
+              context: context,
+            ),
             SizedBox(
               height: 20,
             ),
