@@ -3,15 +3,15 @@ import 'dart:convert';
 
 class ObatModel {
   String? id;
-  final String title;
-  final String note;
-  final int isCompleted;
-  final String date;
-  final String startTime;
-  final String endTime;
-  final int color;
-  final int remind;
-  final String repeat;
+  String? title;
+  String? note;
+  int? isCompleted;
+  String? date;
+  String? startTime;
+  String? endTime;
+  int? color;
+  int? remind;
+  String? repeat;
   ObatModel({
     this.id,
     required this.title,
