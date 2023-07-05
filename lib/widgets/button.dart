@@ -4,13 +4,13 @@ import 'package:medcare/theme.dart';
 
 class MyButton extends StatelessWidget {
   final String label;
-  final Function()? onTap;
-  const MyButton({Key? key, required this.label, required this.onTap})
+  final Function()? onPressed;
+  const MyButton({Key? key, required this.label, required this.onPressed})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onPressed,
       child: Container(
         width: 110,
         height: 50,
