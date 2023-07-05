@@ -655,19 +655,19 @@ class _AddObatState extends State<AddObat> {
 
   _getTimeFromUser({required bool isStartTime}) async {
     var _pickedTime = await _showTimePicker();
-    String _formatedTime = _pickedTime.format(context);
     if (_pickedTime == null) {
       print("Time not picked");
-    } else if (isStartTime == true) {
-      setState(() {
-        startTime = _formatedTime;
-      });
-    } else if (isStartTime == false) {
-      setState(
-        () {
+    } else {
+      String _formatedTime = _pickedTime.format(context);
+      if (isStartTime) {
+        setState(() {
+          startTime = _formatedTime;
+        });
+      } else {
+        setState(() {
           endTime = _formatedTime;
-        },
-      );
+        });
+      }
     }
   }
 
