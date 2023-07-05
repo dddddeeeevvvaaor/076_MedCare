@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10,
           ),
+          _showObat(),
         ],
       ),
     );
@@ -141,14 +142,14 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Get.to(() => const AddObat());
                             },
-                            title: const Text("Obat"),
+                            title: const Text("Poli"),
                             leading: const Icon(Icons.medication),
                           ),
                           ListTile(
                             onTap: () {
                               Get.to(() => const AddObat());
                             },
-                            title: const Text("Poli"),
+                            title: const Text("Obat"),
                             leading: const Icon(Icons.medication),
                           ),
                           ListTile(
@@ -199,5 +200,87 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+
+  _showObat() {
+    return Expanded(
+      child: Obx(() {
+        return ListView.builder(
+            itemCount: oc.obatList.length,
+            itemBuilder: (_, index) {
+              ObatModel obatModel = oc.obatList[index];
+              if (obatModel.repeat == 'Daily') {
+                if (obatModel.isCompleted == 0) {
+                  DateTime date = DateFormat("hh:mm a")
+                      .parse(obatModel.startTime.toString()); //like 11.46
+                  var myTime = DateFormat("HH:mm").format(date); //like 11.46
+                  notifyHelper.scheduledNotification(
+                    int.parse(myTime.toString().split(":")[0]),
+                    int.parse(myTime.toString().split(":")[1]),
+                    obatModel,
+                  );
+                }
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: SlideAnimation(
+                    child: FadeInAnimation(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                            },
+                            child: ObatTile(obatModel),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+              if (obatModel.date == DateFormat.yMd().format(_selectedDate)) {
+                DateTime date =
+                    DateFormat("hh:mm a").parse(obatModel.startTime.toString());
+                var myTime = DateFormat("HH:mm").format(date);
+                if (obatModel.isCompleted == 0) {
+                  notifyHelper.scheduledNotification(
+                    int.parse(myTime.toString().split(":")[0]),
+                    int.parse(myTime.toString().split(":")[1]),
+                    obatModel,
+                  );
+                }
+                return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                              },
+                              child: ObatTile(obatModel),
+                            )
+                          ],
+                        ),
+                      ),
+                    ));
+              } else {
+                return Container();
+              }
+            });
+      }),
+    );
+  }
+
+  _getBGClr(int no) {
+    switch (no) {
+      case 0:
+        return bluishClr;
+      case 1:
+        return pinkClr;
+      case 2:
+        return yellowClr;
+      default:
+        return bluishClr;
+    }
   }
 }
