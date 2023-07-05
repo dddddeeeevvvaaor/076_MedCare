@@ -234,7 +234,9 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                _showBottomSheet(context, obatModel);
+                              },
                               child: ObatTile(obatModel),
                             )
                           ],
@@ -271,7 +273,9 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                _showBottomSheet(context, obatModel);
+                              },
                               child: ObatTile(obatModel),
                             )
                           ],
@@ -300,7 +304,9 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              _showBottomSheet(context, obatModel);
+                            },
                             child: ObatTile(obatModel),
                           )
                         ],
@@ -313,6 +319,93 @@ class _HomePageState extends State<HomePage> {
               }
             });
       }),
+    );
+  }
+
+  _showBottomSheet(BuildContext context, ObatModel obatModel) {
+    Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.only(top: 4),
+        height: obatModel.isCompleted == 1
+            ? MediaQuery.of(context).size.height * 0.24
+            : MediaQuery.of(context).size.height * 0.32,
+        color: Get.isDarkMode ? darkGreyClr : Colors.white,
+        child: Column(
+          children: [
+            Container(
+              height: 6,
+              width: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
+              ),
+            ),
+            Spacer(),
+            obatModel.isCompleted == 1
+                ? Container()
+                : _bottomSheetButton(
+                    label: "Task Completed",
+                    onTap: () {
+                      oc.markObatCompleted(obatModel.id!);
+                      Get.back();
+                    },
+                    clr: primaryClr,
+                    context: context,
+                  ),
+            SizedBox(
+              height: 20,
+            ),
+            _bottomSheetButton(
+              label: "Close",
+              onTap: () {
+                Get.back();
+              },
+              clr: Colors.red[300]!,
+              isClose: true,
+              context: context,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _bottomSheetButton(
+      {required String label,
+      required Function()? onTap,
+      required Color clr,
+      bool isClose = false,
+      required BuildContext context}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        height: 55,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 2,
+            color: isClose == true
+                ? Get.isDarkMode
+                    ? Colors.grey[600]!
+                    : Colors.grey[400]!
+                : clr,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          color: isClose == true ? Colors.transparent : clr,
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: isClose == true
+                ? titleStyle
+                : titleStyle.copyWith(color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 
