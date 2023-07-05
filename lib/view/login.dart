@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medcare/controller/auth_controller.dart';
 import 'package:medcare/model/user_model.dart';
+import 'package:medcare/view/home_page.dart';
 import 'package:medcare/view/register.dart';
 
 class Login extends StatefulWidget {
@@ -128,7 +129,7 @@ class _LoginState extends State<Login> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Login(),
+                              builder: (context) => const HomePage(),
                             ),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(
