@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medcare/controller/poli_controller.dart';
 import 'package:medcare/model/poli_model.dart';
 import 'package:medcare/theme.dart';
+import 'package:medcare/view/home_page.dart';
 import 'package:medcare/widgets/button.dart';
 
 class AddPoli extends StatefulWidget {
@@ -108,7 +109,7 @@ class _AddPoliState extends State<AddPoli> {
                     _colorPallete(),
                     MyButton(
                       label: "Save",
-                      onTap: () {
+                      onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           PoliModel pm = PoliModel(
                             nama: nama!,
@@ -120,7 +121,7 @@ class _AddPoliState extends State<AddPoli> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const AddPoli(),
+                                  builder: (context) => const HomePage(),
                                 ),
                               );
                             },
