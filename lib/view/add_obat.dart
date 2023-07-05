@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:medcare/controller/obat_controller.dart';
 import 'package:medcare/model/obat_model.dart';
 import 'package:medcare/theme.dart';
+import 'package:medcare/view/home_page.dart';
 import 'package:medcare/widgets/button.dart';
 
 class AddObat extends StatefulWidget {
@@ -526,7 +527,7 @@ class _AddObatState extends State<AddObat> {
                     _colorPallete(),
                     MyButton(
                       label: "Save",
-                      onTap: () {
+                      onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ObatModel ob = ObatModel(
                             title: title!,
@@ -540,20 +541,21 @@ class _AddObatState extends State<AddObat> {
                             repeat: repeat!,
                           );
 
-                          obatController.addObat(ob).then;
-                          (_) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const AddObat(),
-                              ),
-                            );
-                          };
+                          obatController.addObat(ob).then(
+                            (_) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                            },
+                          );
                         }
                       },
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
