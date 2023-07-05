@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -209,16 +208,90 @@ class _HomePageState extends State<HomePage> {
             itemCount: oc.obatList.length,
             itemBuilder: (_, index) {
               ObatModel obatModel = oc.obatList[index];
-              if (obatModel.repeat == 'Daily') {
+              if (obatModel.repeat == 'Weekly') {
+                DateTime obatDate =
+                    DateFormat.yMd().parse(obatModel.date.toString());
+                if (obatDate.isBefore(_selectedDate.subtract(
+                      Duration(days: -1),
+                    )) &&
+                    obatDate.isAfter(_selectedDate.subtract(
+                      Duration(days: 7),
+                    ))) {
+                  DateTime date = DateFormat("hh:mm a")
+                      .parse(obatModel.startTime.toString());
+                  var myTime = DateFormat("HH:mm").format(date); //like 11.46
+                  if (obatModel.isCompleted == 0) {
+                    notifyHelper.scheduledNotification(
+                      int.parse(myTime.toString().split(":")[0]),
+                      int.parse(myTime.toString().split(":")[1]),
+                      obatModel,
+                    );
+                  }
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: ObatTile(obatModel),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              } else if (obatModel.repeat == 'Monthly') {
+                DateTime obatDate =
+                    DateFormat.yMd().parse(obatModel.date.toString());
+                if (obatDate.isBefore(_selectedDate.subtract(
+                      Duration(days: -1),
+                    )) &&
+                    obatDate.isAfter(_selectedDate.subtract(
+                      Duration(days: 30),
+                    ))) {
+                  DateTime date = DateFormat("hh:mm a")
+                      .parse(obatModel.startTime.toString());
+                  var myTime = DateFormat("HH:mm").format(date); //like 11.46
+                  if (obatModel.isCompleted == 0) {
+                    notifyHelper.scheduledNotification(
+                      int.parse(myTime.toString().split(":")[0]),
+                      int.parse(myTime.toString().split(":")[1]),
+                      obatModel,
+                    );
+                  }
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    child: SlideAnimation(
+                      child: FadeInAnimation(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: ObatTile(obatModel),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              } else if (obatModel.repeat == 'Daily') {
                 if (obatModel.isCompleted == 0) {
                   DateTime date = DateFormat("hh:mm a")
-                      .parse(obatModel.startTime.toString()); //like 11.46
+                      .parse(obatModel.startTime.toString());
+
                   var myTime = DateFormat("HH:mm").format(date); //like 11.46
                   notifyHelper.scheduledNotification(
-                    int.parse(myTime.toString().split(":")[0]),
-                    int.parse(myTime.toString().split(":")[1]),
-                    obatModel,
-                  );
+                      int.parse(myTime.toString().split(":")[0]),
+                      int.parse(myTime.toString().split(":")[1]),
+                      obatModel);
                 }
                 return AnimationConfiguration.staggeredList(
                   position: index,
@@ -227,8 +300,7 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         children: [
                           GestureDetector(
-                            onTap: () {
-                            },
+                            onTap: () {},
                             child: ObatTile(obatModel),
                           )
                         ],
@@ -236,33 +308,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 );
-              }
-              if (obatModel.date == DateFormat.yMd().format(_selectedDate)) {
-                DateTime date =
-                    DateFormat("hh:mm a").parse(obatModel.startTime.toString());
-                var myTime = DateFormat("HH:mm").format(date);
-                if (obatModel.isCompleted == 0) {
-                  notifyHelper.scheduledNotification(
-                    int.parse(myTime.toString().split(":")[0]),
-                    int.parse(myTime.toString().split(":")[1]),
-                    obatModel,
-                  );
-                }
-                return AnimationConfiguration.staggeredList(
-                    position: index,
-                    child: SlideAnimation(
-                      child: FadeInAnimation(
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                              },
-                              child: ObatTile(obatModel),
-                            )
-                          ],
-                        ),
-                      ),
-                    ));
               } else {
                 return Container();
               }
