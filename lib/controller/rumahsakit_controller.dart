@@ -1,0 +1,39 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:medcare/model/rumahsakit_model.dart';
+
+class RumahSakitController extends GetxController {
+    final rumahSakitController = FirebaseFirestore.instance.collection("rumahsakit");
+
+  final StreamController<List<DocumentSnapshot>> streamController =
+      StreamController<List<DocumentSnapshot>>.broadcast();
+
+  Stream<List<DocumentSnapshot>>? get stream => streamController.stream;
+
+  var obatList = <RumahSakitModel>[].obs;
+
+  Future<void> addRumahSakit(RumahSakitModel rsModel) async {
+    final rumahsakit = rsModel.toMap();
+
+    final DocumentReference documentReference = await rumahSakitController.add(rumahsakit);
+
+    final String docId = documentReference.id;
+
+    final RumahSakitModel rumahsakitModel = RumahSakitModel(
+      id: docId,
+      poli: rsModel.poli,
+      title: rsModel.title,
+      note: rsModel.note,
+      isCompleted: rsModel.isCompleted,
+      date: rsModel.date,
+      startTime: rsModel.startTime,
+      endTime: rsModel.endTime,
+      color: rsModel.color,
+      remind: rsModel.remind,
+      repeat: rsModel.repeat,
+    );
+    await documentReference.update(rumahsakitModel.toMap());
+  }
+}
