@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           _addBar(),
           _addDateBar(),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           _showObat(),
@@ -212,10 +212,10 @@ class _HomePageState extends State<HomePage> {
                 DateTime obatDate =
                     DateFormat.yMd().parse(obatModel.date.toString());
                 if (obatDate.isBefore(_selectedDate.subtract(
-                      Duration(days: -1),
+                      const Duration(days: -1),
                     )) &&
                     obatDate.isAfter(_selectedDate.subtract(
-                      Duration(days: 7),
+                      const Duration(days: 7),
                     ))) {
                   DateTime date = DateFormat("hh:mm a")
                       .parse(obatModel.startTime.toString());
@@ -251,10 +251,10 @@ class _HomePageState extends State<HomePage> {
                 DateTime obatDate =
                     DateFormat.yMd().parse(obatModel.date.toString());
                 if (obatDate.isBefore(_selectedDate.subtract(
-                      Duration(days: -1),
+                      const Duration(days: -1),
                     )) &&
                     obatDate.isAfter(_selectedDate.subtract(
-                      Duration(days: 30),
+                      const Duration(days: 30),
                     ))) {
                   DateTime date = DateFormat("hh:mm a")
                       .parse(obatModel.startTime.toString());
@@ -324,59 +324,66 @@ class _HomePageState extends State<HomePage> {
 
   _showBottomSheet(BuildContext context, ObatModel obatModel) {
     Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.only(top: 4),
-        height: obatModel.isCompleted == 1
-            ? MediaQuery.of(context).size.height * 0.24
-            : MediaQuery.of(context).size.height * 0.32,
-        color: Get.isDarkMode ? darkGreyClr : Colors.white,
-        child: Column(
-          children: [
-            Container(
-              height: 6,
-              width: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
-              ),
-            ),
-            Spacer(),
-            obatModel.isCompleted == 1
-                ? Container()
-                : _bottomSheetButton(
-                    label: "Task Completed",
-                    onTap: () {
-                      oc.markObatCompleted(obatModel.id!);
-                      Get.back();
-                    },
-                    clr: primaryClr,
-                    context: context,
+      SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(top: 4),
+            height: obatModel.isCompleted == 1 ? 200 : 320,
+            color: Get.isDarkMode ? darkGreyClr : Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  height: 6,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Get.isDarkMode ? Colors.grey[600] : Colors.grey[300],
                   ),
-            _bottomSheetButton(
-              label: "Delete Task",
-              onTap: () {
-                oc.deleteObat(obatModel.id!);
-                Get.back();
-              },
-              clr: Colors.red[300]!,
-              context: context,
+                ),
+                const SizedBox(height: 10),
+                obatModel.isCompleted == 1
+                    ? Container()
+                    : _bottomSheetButton(
+                        label: "Obat Completed",
+                        onTap: () {
+                          oc.markObatCompleted(obatModel.id!);
+                          Get.back();
+                        },
+                        clr: primaryClr,
+                        context: context,
+                      ),
+                _bottomSheetButton(
+                  label: "Edit Obat",
+                  onTap: () {
+                    oc.deleteObat(obatModel.id!);
+                    Get.back();
+                  },
+                  clr: Colors.green[300]!,
+                  context: context,
+                ),
+                _bottomSheetButton(
+                  label: "Delete Obat",
+                  onTap: () {
+                    oc.deleteObat(obatModel.id!);
+                    Get.back();
+                  },
+                  clr: Colors.red[300]!,
+                  context: context,
+                ),
+                const SizedBox(height: 20),
+                _bottomSheetButton(
+                  label: "Close",
+                  onTap: () {
+                    Get.back();
+                  },
+                  clr: Colors.red[300]!,
+                  isClose: true,
+                  context: context,
+                ),
+                const SizedBox(height: 10),
+              ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            _bottomSheetButton(
-              label: "Close",
-              onTap: () {
-                Get.back();
-              },
-              clr: Colors.red[300]!,
-              isClose: true,
-              context: context,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -392,7 +399,7 @@ class _HomePageState extends State<HomePage> {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
-        height: 55,
+        height: 40,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
