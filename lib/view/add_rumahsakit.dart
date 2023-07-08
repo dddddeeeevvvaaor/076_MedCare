@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:medcare/controller/rumahsakit_controller.dart';
-import 'package:medcare/model/obat_model.dart';
 import 'package:medcare/model/rumahsakit_model.dart';
 import 'package:medcare/theme.dart';
 import 'package:medcare/widgets/button.dart';

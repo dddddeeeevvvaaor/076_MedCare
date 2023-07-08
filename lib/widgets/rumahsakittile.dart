@@ -5,7 +5,7 @@ import 'package:medcare/theme.dart';
 
 class RumahSakitTile extends StatelessWidget {
   final RumahSakitModel? rumahSakitModel;
-  const RumahSakitTile(this.rumahSakitModel);
+  RumahSakitTile(this.rumahSakitModel);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class RumahSakitTile extends StatelessWidget {
           RotatedBox(
             quarterTurns: 3,
             child: Text(
-              rumahSakitModel!.isCompleted == 1 ? "COMPLETED" : "OBAT",
+              rumahSakitModel!.isCompleted == 1 ? "COMPLETED" : "Rumah Sakit",
               style: GoogleFonts.lato(
                 textStyle: TextStyle(
                     fontSize: 10,
