@@ -50,4 +50,14 @@ class RumahSakitController extends GetxController {
     rumahsakitList.value = rumahsakit.docs.map((doc) => RumahSakitModel.fromMap(doc.data())).toList();
     return rumahsakit.docs;
   }
+
+  Future deleteRumahSakit(String id) async {
+    await rumahSakitController.doc(id).delete();
+    await getRumahSakit();
+  }
+
+  Future markRumahSakitCompleted(String id) async {
+    await rumahSakitController.doc(id).update({'isCompleted': 1});
+    await getRumahSakit();
+  }
 }
