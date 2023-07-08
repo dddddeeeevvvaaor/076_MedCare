@@ -14,7 +14,7 @@ class RumahSakitController extends GetxController {
 
   Stream<List<DocumentSnapshot>>? get stream => streamController.stream;
 
-  var obatList = <RumahSakitModel>[].obs;
+  var rumahsakitList = <RumahSakitModel>[].obs;
 
   Future<void> addRumahSakit(RumahSakitModel rsModel) async {
     final rumahsakit = rsModel.toMap();
@@ -42,5 +42,12 @@ class RumahSakitController extends GetxController {
   Future<List> getPolis() async {
     var polis = await poliController.getPoli();
     return polis;
+  }
+
+  Future<List<DocumentSnapshot>> getRumahSakit() async {
+    final rumahsakit = await rumahSakitController.get();
+    streamController.add(rumahsakit.docs);
+    rumahsakitList.value = rumahsakit.docs.map((doc) => RumahSakitModel.fromMap(doc.data())).toList();
+    return rumahsakit.docs;
   }
 }
