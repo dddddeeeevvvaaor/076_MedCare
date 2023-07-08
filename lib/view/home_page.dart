@@ -15,6 +15,7 @@ import 'package:medcare/theme.dart';
 import 'package:medcare/view/add_obat.dart';
 import 'package:medcare/view/add_rumahsakit.dart';
 import 'package:medcare/view/login.dart';
+import 'package:medcare/view/poli.dart';
 import 'package:medcare/widgets/button.dart';
 import 'package:medcare/widgets/obattile.dart';
 import 'package:medcare/widgets/rumahsakittile.dart';
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           ListTile(
                             onTap: () {
-                              Get.to(() => const AddObat());
+                              Get.to(() => const Poli());
                             },
                             title: const Text("Poli"),
                             leading: const Icon(Icons.medication),
@@ -484,15 +485,6 @@ class _HomePageState extends State<HomePage> {
                         context: context,
                       ),
                 _bottomSheetButton(
-                  label: "Edit Obat",
-                  onTap: () {
-                    oc.deleteObat(obatModel.id!);
-                    Get.back();
-                  },
-                  clr: Colors.green[300]!,
-                  context: context,
-                ),
-                _bottomSheetButton(
                   label: "Delete Obat",
                   onTap: () {
                     oc.deleteObat(obatModel.id!);
@@ -581,7 +573,7 @@ class _HomePageState extends State<HomePage> {
                     : _bottomSheetButton(
                         label: "Rumah Sakit Completed",
                         onTap: () {
-                          oc.markObatCompleted(rumahSakitModel.id!);
+                          rs.markRumahSakitCompleted(rumahSakitModel.id!);
                           Get.back();
                         },
                         clr: primaryClr,
@@ -599,7 +591,7 @@ class _HomePageState extends State<HomePage> {
                 _bottomSheetButton(
                   label: "Delete Obat",
                   onTap: () {
-                    oc.deleteObat(rumahSakitModel.id!);
+                    rs.deleteRumahSakit(rumahSakitModel.id!);
                     Get.back();
                   },
                   clr: Colors.red[300]!,

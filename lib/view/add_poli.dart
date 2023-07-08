@@ -4,6 +4,7 @@ import 'package:medcare/controller/poli_controller.dart';
 import 'package:medcare/model/poli_model.dart';
 import 'package:medcare/theme.dart';
 import 'package:medcare/view/home_page.dart';
+import 'package:medcare/view/poli.dart';
 import 'package:medcare/widgets/button.dart';
 
 class AddPoli extends StatefulWidget {
@@ -106,14 +107,12 @@ class _AddPoliState extends State<AddPoli> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _colorPallete(),
                     MyButton(
                       label: "Save",
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           PoliModel pm = PoliModel(
                             nama: nama!,
-                            color: color!,
                           );
 
                           poliController.addPoli(pm).then(
@@ -121,7 +120,7 @@ class _AddPoliState extends State<AddPoli> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
+                                  builder: (context) => const Poli(),
                                 ),
                               );
                             },
@@ -136,51 +135,6 @@ class _AddPoliState extends State<AddPoli> {
           ),
         ),
       ),
-    );
-  }
-
-  _colorPallete() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Color",
-          style: titleStyle,
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        Wrap(
-          children: List<Widget>.generate(3, (int index) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  color = index;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: CircleAvatar(
-                  radius: 14,
-                  backgroundColor: index == 0
-                      ? primaryClr
-                      : index == 1
-                          ? pinkClr
-                          : yellowClr,
-                  // ignore: unrelated_type_equality_checks
-                  child: color == index
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.white,
-                          size: 16,
-                        )
-                      : Container(),
-                ),
-              ),
-            );
-          }),
-        )
-      ],
     );
   }
 

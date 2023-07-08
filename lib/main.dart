@@ -4,7 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:medcare/services/theme_services.dart';
 import 'package:medcare/theme.dart';
-import 'package:medcare/view/home_page.dart';
+import 'package:medcare/view/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: Themes.light,
       darkTheme: Themes.dark,
       themeMode: ThemeService().theme,
-      home:  HomePage(),
+      home:  SplashScreen(),
     );
   }
 }

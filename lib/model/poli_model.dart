@@ -4,18 +4,15 @@ import 'dart:convert';
 class PoliModel {
   String? id;
   final String nama;
-  final int color;
   PoliModel({
     this.id,
     required this.nama,
-    required this.color,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'nama': nama,
-      'color': color,
     };
   }
 
@@ -23,7 +20,6 @@ class PoliModel {
     return PoliModel(
       id: map['id'] != null ? map['id'] as String : null,
       nama: map['nama'] as String,
-      color: map['color'] as int,
     );
   }
 

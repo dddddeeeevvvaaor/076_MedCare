@@ -39,7 +39,8 @@ class ObatController extends GetxController {
   Future<List<DocumentSnapshot>> getObat() async {
     final obat = await obatController.get();
     streamController.add(obat.docs);
-    obatList.value = obat.docs.map((doc) => ObatModel.fromMap(doc.data())).toList();
+    obatList.value =
+        obat.docs.map((doc) => ObatModel.fromMap(doc.data())).toList();
     return obat.docs;
   }
 
