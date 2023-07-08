@@ -11,6 +11,7 @@ import 'package:medcare/services/notification_services.dart';
 import 'package:medcare/services/theme_services.dart';
 import 'package:medcare/theme.dart';
 import 'package:medcare/view/add_obat.dart';
+import 'package:medcare/view/add_rumahsakit.dart';
 import 'package:medcare/view/login.dart';
 import 'package:medcare/widgets/button.dart';
 import 'package:medcare/widgets/obattile.dart';
@@ -149,6 +150,13 @@ class _HomePageState extends State<HomePage> {
                               Get.to(() => const AddObat());
                             },
                             title: const Text("Obat"),
+                            leading: const Icon(Icons.medication),
+                          ),
+                          ListTile(
+                            onTap: () {
+                              Get.to(() => const AddRumahSakit());
+                            },
+                            title: const Text("Rumah Sakit"),
                             leading: const Icon(Icons.medication),
                           ),
                           ListTile(
