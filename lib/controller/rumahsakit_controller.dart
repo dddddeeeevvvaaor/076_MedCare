@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:medcare/controller/poli_controller.dart';
 import 'package:medcare/model/rumahsakit_model.dart';
 
 class RumahSakitController extends GetxController {
+  var poliController = PoliController();
     final rumahSakitController = FirebaseFirestore.instance.collection("rumahsakit");
 
   final StreamController<List<DocumentSnapshot>> streamController =
@@ -35,5 +37,10 @@ class RumahSakitController extends GetxController {
       repeat: rsModel.repeat,
     );
     await documentReference.update(rumahsakitModel.toMap());
+  }
+
+  Future<List> getPolis() async {
+    var polis = await poliController.getPoli();
+    return polis;
   }
 }
