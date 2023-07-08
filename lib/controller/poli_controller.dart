@@ -21,19 +21,22 @@ class PoliController {
     final PoliModel poliModel = PoliModel(
       id: docId,
       nama: plModel.nama,
-      color: plModel.color,
     );
     await documentReference.update(poliModel.toMap());
   }
 
-    Future getPoli() async {
+  Future getPoli() async {
     final poli = await poliController.get();
     streamController.add(poli.docs);
     return poli.docs;
   }
 
-    Future<void> deletePoli(String id) async {
+  Future<void> deletePoli(String id) async {
     await poliController.doc(id).delete();
     await getPoli();
+  }
+
+  Future<void> updatePoli(PoliModel plModel) async {
+    await poliController.doc(plModel.id).update(plModel.toMap());
   }
 }
