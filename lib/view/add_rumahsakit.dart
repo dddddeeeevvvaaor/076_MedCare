@@ -1,3 +1,4 @@
+///mengimpor semua pustaka dan komponen yang diperlukan untuk digunakan dalam kode. Ini termasuk file-file controller, model, tema, dan lain-lain yang digunakan dalam halaman penambahan rumah sakit.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +9,9 @@ import 'package:medcare/widgets/button.dart';
 
 import 'home_page.dart';
 
+///Ini adalah kelas utama yang merupakan StatefulWidget. Ini digunakan untuk membuat tampilan halaman penambahan rumah sakit dan mengelola semua elemen di dalamnya.
 class AddRumahSakit extends StatefulWidget {
+  ///ini adalah konstruktor yang menerima parameter key yang merupakan kunci untuk widget AddRumahSakit.
   const AddRumahSakit({super.key});
 
   @override
@@ -18,8 +21,10 @@ class AddRumahSakit extends StatefulWidget {
 class _AddRumahSakitState extends State<AddRumahSakit> {
   var rumahsakitController = RumahSakitController();
 
+  ///ini adalah objek kunci global yang digunakan untuk mengelola keadaan formulir di dalam halaman. Ini memungkinkan untuk memeriksa validitas formulir dan mengakses nilai yang dimasukkan oleh pengguna.
   final _formKey = GlobalKey<FormState>();
 
+  ///mendeklarasikan beberapa variabel seperti poli, title, note, date, startTime, endTime, color, remind, remindList, dan repeat untuk menyimpan data yang diisi oleh pengguna pada formulir. Variabel-variabel ini digunakan untuk mengumpulkan informasi yang akan disimpan dalam model RumahSakitModel.
   String? poli;
   String? title;
   String? note;
@@ -32,6 +37,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
   String? repeat = "None";
   List<String> repeatList = ["None", "Daily", "Weekly", "Monthly"];
 
+  ///Metode ini adalah bagian utama dari widget AddRumahSakit. Ini membangun tampilan halaman penambahan rumah sakit dengan menggunakan widget-widget Flutter seperti Scaffold, Container, Text, TextFormField, DropdownButton, IconButton, dan lainnya. Metode ini juga menangani validasi input dan menyimpan data saat tombol "Save" ditekan.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +110,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
                     },
                   ),
                 ),
-                
+
                 Text(
                   "title",
                   style: titleStyle,
@@ -620,6 +626,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
     );
   }
 
+  ///ini adalah metode yang membangun bagian tampilan untuk memilih warna yang akan ditambahkan pada data rumah sakit. Ini termasuk daftar warna yang dapat dipilih dengan mengklik CircleAvatar.
   _colorPallete() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -668,6 +675,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
     );
   }
 
+  ///ini adalah metode yang membangun AppBar pada halaman penambahan rumah sakit. Ini termasuk tombol kembali dan avatar pengguna yang terhubung.
   _appBar(BuildContext context) {
     return AppBar(
       elevation: 1,
@@ -694,6 +702,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
     );
   }
 
+  ///ini adalah metode yang memungkinkan pengguna untuk memilih tanggal dengan menampilkan dialog date picker.
   _getDateFromUser() async {
     DateTime? _pickerDate = await showDatePicker(
         context: context,
@@ -709,6 +718,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
     }
   }
 
+  ///ini adalah metode yang memungkinkan pengguna untuk memilih waktu dengan menampilkan dialog time picker. Metode ini juga membedakan antara pemilihan waktu awal dan waktu akhir.
   _getTimeFromUser({required bool isStartTime}) async {
     var _pickedTime = await _showTimePicker();
     if (_pickedTime == null) {
@@ -727,6 +737,7 @@ class _AddRumahSakitState extends State<AddRumahSakit> {
     }
   }
 
+  ///ini adalah metode yang menampilkan dialog time picker dengan pengaturan waktu awal berdasarkan waktu yang telah dipilih sebelumnya.
   _showTimePicker() {
     return showTimePicker(
       initialEntryMode: TimePickerEntryMode.input,

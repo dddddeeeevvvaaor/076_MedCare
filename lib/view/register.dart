@@ -1,9 +1,12 @@
+///mengimpor pustaka dan komponen yang diperlukan untuk mengembangkan halaman Registrasi. Ini mencakup pustaka Flutter seperti package:flutter/material.dart, package:medcare/controller/auth_controller.dart, dan package:medcare/model/user_model.dart.
 import 'package:flutter/material.dart';
 import 'package:medcare/controller/auth_controller.dart';
 import 'package:medcare/model/user_model.dart';
 import 'package:medcare/view/login.dart';
 
+///Ini adalah kelas utama yang merupakan StatefulWidget. Kelas ini digunakan untuk membuat tampilan halaman Registrasi dan mengelola semua elemen di dalamnya.
 class Register extends StatefulWidget {
+  ///ini adalah konstruktor yang menerima parameter key yang merupakan kunci untuk widget Register.
   Register({Key? key}) : super(key: key);
 
   @override
@@ -11,13 +14,21 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  ///Variabel boolean _isObscure digunakan untuk mengontrol apakah teks password harus ditampilkan dalam bentuk tersembunyi atau tidak.
   bool _isObscure = true;
+
+  ///Ini adalah objek kunci global yang digunakan untuk mengelola keadaan formulir di dalam halaman. Ini memungkinkan untuk memeriksa validitas formulir dan mengakses nilai yang dimasukkan oleh pengguna.
   final form = GlobalKey<FormState>();
+
+  ///Ini adalah objek dari AuthController, yang digunakan untuk mengelola otentikasi pengguna.
   final auth = AuthController();
+
+  ///mendeklarasikan beberapa variabel String seperti nama, email, dan password untuk menyimpan data yang diisi oleh pengguna pada formulir.
   String? name;
   String? email;
   String? password;
 
+///Metode build adalah bagian utama dari widget Register. Ini membangun tampilan halaman registrasi dengan menggunakan widget-widget Flutter seperti Scaffold, Container, TextFormField, ElevatedButton, dan lainnya. Metode ini juga memanggil metode lain yang digunakan untuk membangun bagian-bagian spesifik dari tampilan.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,6 +123,7 @@ class _RegisterState extends State<Register> {
                       filled: true,
                       fillColor: Colors.white,
                       prefixIcon: const Icon(Icons.lock),
+                      ///Metode ini digunakan untuk mengganti status _isObscure, yang mengubah tampilan teks password menjadi tersembunyi atau terlihat.
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -142,8 +154,9 @@ class _RegisterState extends State<Register> {
                   ElevatedButton(
                     onPressed: () async {
                       if (form.currentState!.validate()) {
-                        UserModel? registeredUser = await auth
-                            .registerWithEmailAndPassword(
+                        UserModel? registeredUser =
+                        ///Metode ini digunakan untuk menampilkan dialog pemrosesan saat pengguna menekan tombol registrasi. Ini juga memanggil metode registerWithEmailAndPassword dari AuthController untuk melakukan pendaftaran pengguna dengan email, password, dan nama yang telah diisi.
+                            await auth.registerWithEmailAndPassword(
                                 email!, password!, name!);
                         if (registeredUser != null) {
                           // ignore: use_build_context_synchronously
@@ -207,8 +220,8 @@ class _RegisterState extends State<Register> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 12),
                     ),
                   ),
                   const SizedBox(height: 20),

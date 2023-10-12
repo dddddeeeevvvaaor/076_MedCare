@@ -1,3 +1,4 @@
+///mengimpor semua pustaka dan komponen yang diperlukan untuk digunakan dalam kode, termasuk flutter/material.dart, get/get.dart, intl/intl.dart, medcare/controller/obat_controller.dart, medcare/model/obat_model.dart, medcare/theme.dart, medcare/view/home_page.dart, dan medcare/widgets/button.dart.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,9 @@ import 'package:medcare/theme.dart';
 import 'package:medcare/view/home_page.dart';
 import 'package:medcare/widgets/button.dart';
 
+///Ini adalah kelas utama yang merupakan StatefulWidget. Ini digunakan untuk membuat tampilan halaman penambahan obat dan mengelola semua elemen di dalamnya.
 class AddObat extends StatefulWidget {
+  ///ini adalah konstruktor yang menerima parameter key yang merupakan kunci untuk widget AddObat.
   const AddObat({super.key});
 
   @override
@@ -17,6 +20,7 @@ class AddObat extends StatefulWidget {
 class _AddObatState extends State<AddObat> {
   var obatController = ObatController();
 
+  ///ini adalah objek kunci global yang digunakan untuk mengelola keadaan formulir di dalam halaman. Ini memungkinkan untuk memeriksa validitas formulir dan mengakses nilai yang dimasukkan oleh pengguna.
   final _formKey = GlobalKey<FormState>();
 
   String? title;
@@ -26,10 +30,17 @@ class _AddObatState extends State<AddObat> {
   String? endTime = "9:30 PM";
   int color = 0;
   int remind = 5;
+
+  ///ini adalah list yang berisi daftar opsi pengingat dalam menit.
   List<int> remindList = [5, 10, 15, 20, 25, 30];
+
+  ///ini adalah variabel nullable yang digunakan untuk menyimpan pengaturan pengulangan obat.
   String? repeat = "None";
+
+  ///ini adalah list yang berisi daftar opsi pengulangan obat.
   List<String> repeatList = ["None", "Daily", "Weekly", "Monthly"];
 
+  ///Metode ini adalah bagian utama dari widget AddObat. Ini membangun tampilan halaman penambahan obat dengan menggunakan widget-widget Flutter seperti Scaffold, Container, Text, TextFormField, MyButton, dan lainnya. Metode ini juga menangani validasi input dan menyimpan data saat tombol "Save" ditekan.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -564,6 +575,7 @@ class _AddObatState extends State<AddObat> {
     );
   }
 
+  ///ini adalah metode yang membangun bagian pemilihan warna untuk obat. Ini memungkinkan pengguna untuk memilih warna obat dengan mengklik lingkaran warna.
   _colorPallete() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -612,6 +624,7 @@ class _AddObatState extends State<AddObat> {
     );
   }
 
+  ///ini adalah metode yang membangun AppBar pada halaman penambahan obat. Ini termasuk tombol kembali dan avatar pengguna yang terhubung.
   _appBar(BuildContext context) {
     return AppBar(
       elevation: 1,
@@ -638,6 +651,7 @@ class _AddObatState extends State<AddObat> {
     );
   }
 
+  ///ini adalah metode yang memungkinkan pengguna untuk memilih tanggal dengan menggunakan date picker.
   _getDateFromUser() async {
     DateTime? _pickerDate = await showDatePicker(
         context: context,
@@ -653,6 +667,7 @@ class _AddObatState extends State<AddObat> {
     }
   }
 
+  ///ini adalah metode yang memungkinkan pengguna untuk memilih waktu mulai dan waktu selesai dengan menggunakan time picker.
   _getTimeFromUser({required bool isStartTime}) async {
     var _pickedTime = await _showTimePicker();
     if (_pickedTime == null) {
@@ -671,6 +686,7 @@ class _AddObatState extends State<AddObat> {
     }
   }
 
+  ///ini adalah metode yang menampilkan time picker untuk memilih waktu.
   _showTimePicker() {
     return showTimePicker(
       initialEntryMode: TimePickerEntryMode.input,

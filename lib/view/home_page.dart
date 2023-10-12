@@ -1,3 +1,4 @@
+///mengimpor semua pustaka dan komponen yang diperlukan untuk digunakan dalam kode. Ini termasuk beberapa pustaka, model, dan widget yang digunakan dalam halaman beranda (HomePage).
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ import 'package:medcare/widgets/button.dart';
 import 'package:medcare/widgets/obattile.dart';
 import 'package:medcare/widgets/rumahsakittile.dart';
 
+///Ini adalah kelas utama (HomePage) yang merupakan StatefulWidget. Ini digunakan untuk membuat tampilan halaman beranda dan mengelola semua elemen di dalamnya.
 class HomePage extends StatefulWidget {
+  ///ini adalah konstruktor yang menerima parameter key yang merupakan kunci untuk widget HomePage.
   const HomePage({Key? key});
 
   @override
@@ -28,11 +31,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ///Beberapa variabel global yang digunakan dalam halaman beranda, seperti _selectedDate, oc (Objek dari ObatController), rs (Objek dari RumahSakitController), dan notifyHelper (Objek dari NotifyHelper).
   DateTime _selectedDate = DateTime.now();
   var oc = Get.put(ObatController());
   var rs = Get.put(RumahSakitController());
   var notifyHelper;
 
+  ///Metode ini digunakan untuk melakukan logout pengguna dari aplikasi.
   Future<void> _logout() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushAndRemoveUntil(
@@ -42,6 +47,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Metode ini dijalankan ketika widget pertama kali dibuat. Ini digunakan untuk menginisialisasi beberapa variabel dan objek seperti notifyHelper, serta untuk mengambil data obat dan rumah sakit dari controller masing-masing.
   @override
   void initState() {
     super.initState();
@@ -52,6 +58,7 @@ class _HomePageState extends State<HomePage> {
     rs.getRumahSakit();
   }
 
+  ///Metode ini adalah bagian utama dari widget HomePage. Ini membangun tampilan halaman beranda dengan menggunakan widget-widget Flutter seperti Scaffold, AppBar, Column, ListView.builder, dan lainnya. Metode ini juga memanggil metode lain yang digunakan untuk membangun bagian-bagian spesifik dari tampilan.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +77,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Metode ini digunakan untuk membangun bagian baris tanggal pada halaman beranda. Ini mencakup widget DatePicker yang memungkinkan pengguna untuk memilih tanggal.
   _addDateBar() {
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 20),
@@ -110,6 +118,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Metode ini digunakan untuk membangun bagian baris tambahan yang mencakup tanggal hari ini dan tombol "+Add". Tombol ini memunculkan dialog untuk menambahkan obat, rumah sakit, atau untuk logout.
   _addBar() {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
@@ -183,6 +192,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Metode ini membangun AppBar di bagian atas halaman beranda. Ini mencakup tombol untuk mengganti tema aplikasi dan avatar pengguna.
   _appBar() {
     return AppBar(
       elevation: 1,
@@ -215,6 +225,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Metode ini digunakan untuk menampilkan daftar obat dan rumah sakit dalam bentuk daftar. Ini menggunakan widget ListView.builder untuk menggambarkan daftar item.
   _showObatandRumahSakit() {
     return Expanded(
       child: Obx(() {
@@ -454,6 +465,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ///Metode ini digunakan untuk menampilkan bottom sheet dengan opsi seperti "Obat Completed", "Delete Obat", dan "Close" ketika item obat diklik.
   _showBottomSheet(BuildContext context, ObatModel obatModel) {
     Get.bottomSheet(
       SingleChildScrollView(
@@ -512,6 +524,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+///Metode ini digunakan untuk membangun tombol pada bottom sheet, seperti "Obat Completed", "Delete Obat", dan "Close".
   _bottomSheetButton(
       {required String label,
       required Function()? onTap,
@@ -548,6 +561,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+///Metode ini digunakan untuk menampilkan bottom sheet untuk item rumah sakit dengan opsi seperti "Rumah Sakit Completed", "Edit Obat", "Delete Obat", dan "Close".
   _showBottomSheetRumahSaki(
       BuildContext context, RumahSakitModel rumahSakitModel) {
     Get.bottomSheet(
@@ -616,6 +630,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+///Metode ini digunakan untuk membangun tombol pada bottom sheet rumah sakit, seperti "Rumah Sakit Completed", "Edit Obat", "Delete Obat", dan "Close".
   _bottomSheetButtonRumahSakit(
       {required String label,
       required Function()? onTap,

@@ -1,7 +1,9 @@
+///mengimpor pustaka dan komponen yang diperlukan untuk mengelola tema aplikasi dalam kode Flutter. Ini termasuk import untuk Flutter Material library (flutter/material.dart), GetX state management (get/get.dart), dan GetStorage untuk menyimpan pengaturan tema aplikasi.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+///Ini adalah kelas yang bertanggung jawab untuk mengelola tema aplikasi dalam aplikasi.
 class ThemeService{
   final _box = GetStorage();
   final _key = 'isDarkMode';

@@ -1,10 +1,13 @@
+///mengimpor pustaka dan komponen yang diperlukan untuk mengembangkan halaman "Login". Ini mencakup pustaka Flutter seperti package:flutter/material.dart, package:medcare/controller/auth_controller.dart, package:medcare/model/user_model.dart, package:medcare/view/home_page.dart, dan package:medcare/view/register.dart.
 import 'package:flutter/material.dart';
 import 'package:medcare/controller/auth_controller.dart';
 import 'package:medcare/model/user_model.dart';
 import 'package:medcare/view/home_page.dart';
 import 'package:medcare/view/register.dart';
 
+///Ini adalah kelas utama yang merupakan StatefulWidget. Kelas ini digunakan untuk membuat tampilan halaman "Login" dan mengelola semua elemen di dalamnya.
 class Login extends StatefulWidget {
+  ///ini adalah konstruktor yang menerima parameter key yang merupakan kunci untuk widget Login.
   const Login({Key? key}) : super(key: key);
 
   @override
@@ -12,12 +15,20 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  ///Variabel boolean _isObscure digunakan untuk mengontrol apakah teks kata sandi harus ditampilkan dalam bentuk tersembunyi atau tidak.
   bool _isObscure = true;
+
+  ///Variabel form adalah objek GlobalKey<FormState> yang digunakan untuk mengelola keadaan formulir di dalam halaman. Ini memungkinkan untuk memeriksa validitas formulir dan mengakses nilai yang dimasukkan oleh pengguna.
   final form = GlobalKey<FormState>();
+
+  ///Variabel authCr adalah objek dari AuthController, yang mungkin digunakan untuk mengelola otentikasi pengguna.
   final authCr = AuthController();
+
+  ///mendeklarasikan dua variabel String, yaitu email dan password, untuk menyimpan data yang dimasukkan oleh pengguna pada formulir.
   String? email;
   String? password;
 
+  ///Metode build adalah bagian utama dari widget "Login". Ini membangun tampilan halaman "Login" dengan menggunakan widget-widget Flutter seperti Scaffold, Container, Form, TextFormField, ElevatedButton, TextButton, dan lainnya.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

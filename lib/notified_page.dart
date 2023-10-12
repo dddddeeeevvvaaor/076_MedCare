@@ -1,12 +1,17 @@
+///mengimpor pustaka dan komponen yang diperlukan untuk mengembangkan aplikasi Flutter.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+///Ini adalah kelas utama yang merupakan StatelessWidget. Kelas ini digunakan untuk membuat tampilan halaman yang akan menampilkan pesan pemberitahuan.
 class NotifiedPage extends StatelessWidget{
+  ///ini adalah variabel label yang digunakan untuk menyimpan teks pemberitahuan yang akan ditampilkan di halaman.
   final String? label;
+  ///Kelas ini memiliki konstruktor yang menerima parameter label yang merupakan teks pemberitahuan yang akan ditampilkan di halaman.
   const NotifiedPage({Key?key,required this.label}):super(key:key);
   @override
+  ///Metode ini adalah bagian utama dari widget NotifiedPage. Ini membangun tampilan halaman pemberitahuan dengan menggunakan widget-widget Flutter seperti Scaffold, AppBar, IconButton, Text, dan lainnya. Metode ini juga mengambil warna berdasarkan mode tema saat ini menggunakan Get.isDarkMode.
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(

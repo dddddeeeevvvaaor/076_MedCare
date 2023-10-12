@@ -1,3 +1,4 @@
+///mengimpor pustaka dan komponen yang diperlukan untuk mengembangkan halaman "Poli". Ini mencakup pustaka Flutter seperti package:flutter/material.dart, package:medcare/controller/poli_controller.dart, package:medcare/model/poli_model.dart, dan beberapa lainnya.
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medcare/controller/poli_controller.dart';
@@ -6,7 +7,9 @@ import 'package:medcare/view/add_poli.dart';
 import 'package:medcare/view/edit_poli.dart';
 import 'package:medcare/view/home_page.dart';
 
+///Ini adalah kelas utama yang merupakan StatefulWidget. Kelas ini digunakan untuk membuat tampilan halaman "Poli" dan mengelola semua elemen di dalamnya.
 class Poli extends StatefulWidget {
+  ///ini adalah konstruktor yang menerima parameter key yang merupakan kunci untuk widget Poli.
   const Poli({super.key});
 
   @override
@@ -16,12 +19,14 @@ class Poli extends StatefulWidget {
 class _PoliState extends State<Poli> {
   var poli = PoliController();
 
+  ///Metode initState digunakan untuk inisialisasi awal. Dalam kasus ini, itu digunakan untuk memanggil metode getPoli dari PoliController untuk mendapatkan daftar poli.
   @override
   void initState() {
     super.initState();
     poli.getPoli();
   }
 
+  ///Metode build adalah bagian utama dari widget "Poli". Ini membangun tampilan halaman "Poli" dengan menggunakan widget-widget Flutter seperti Scaffold, Container, StreamBuilder, ListView.builder, Card, ListTile, CircleAvatar, IconButton, dan lainnya.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,6 +207,7 @@ class _PoliState extends State<Poli> {
           ],
         ),
       ),
+      ///Ini adalah tombol tindakan mengambang yang digunakan untuk menavigasi ke halaman "AddPoli" saat ditekan.
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
